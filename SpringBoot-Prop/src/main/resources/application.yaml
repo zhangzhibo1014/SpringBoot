@@ -1,0 +1,7 @@
+#person:
+#  id: 2
+#  name: jack
+#  hobby: [play, run, dance]
+#  family: [father, mother]
+#  map: {code: 100, msg: success}
+#  pet: {type: baby, name: didi}
