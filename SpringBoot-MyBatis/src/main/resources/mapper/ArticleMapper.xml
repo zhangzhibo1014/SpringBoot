@@ -1,0 +1,40 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatis.mapper.ArticleMapper">
+    
+    <resultMap id="articleWithComment" type="Article">
+        <id column="id" property="id"/>
+        <result column="title" property="title" />
+        <result column="content" property="content" />
+        <collection property="commentList" ofType="Comment">
+            <id property="id" column="cId" />
+            <result property="content" column="cContent" />
+            <result property="author" column="author" />
+        </collection>
+    </resultMap>
+    
+    <select id="selectArticle" resultMap="articleWithComment">
+        select a.*, c.id cId, c.content cContent, c.author
+        from t_article a, t_comment c
+        where a.id = c.a_id and a.id = #{id}
+    </select>
+
+    <update id="updateArticle" parameterType="Article">
+        update t_article
+        <set>
+            <if test="title != null and title != ''">
+                title = #{title},
+            </if>
+            <if test="content != null and content != ''">
+                content = #{content}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="findById" parameterType="int" resultType="Article">
+        select * from t_article
+        where id = #{id}
+    </select>
+</mapper>
