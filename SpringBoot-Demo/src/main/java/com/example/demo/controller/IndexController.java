@@ -31,4 +31,11 @@ public class IndexController {
         return map;
     }
 
+    /**
+    * HelloWorld
+    */
+    @RequestMapping("/hello")
+    public String hello() {
+        return "HelloWorld";
+    }
 }
